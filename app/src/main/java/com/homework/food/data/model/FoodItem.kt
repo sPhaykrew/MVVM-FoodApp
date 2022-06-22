@@ -12,7 +12,6 @@ data class FoodItem(
     @PrimaryKey val id: String,
     @ColumnInfo val calories: String,
     @ColumnInfo val carbos: String,
-    @ColumnInfo val country: String,
     @ColumnInfo val description: String,
     @ColumnInfo val difficulty: Int,
     @ColumnInfo val fats: String,
