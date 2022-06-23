@@ -1,41 +1,58 @@
 package com.homework.food.ui.main.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import android.util.Log
+import androidx.lifecycle.*
 import com.homework.food.data.model.FoodItem
 import com.homework.food.data.repository.Repository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class FoodViewModel(private val repository: Repository) : ViewModel() {
-    val foods : MutableLiveData<List<FoodItem>> = MutableLiveData()
-    val errorMessage : MutableLiveData<String> = MutableLiveData()
-    val loading : MutableLiveData<Boolean> = MutableLiveData()
+    val errorMessage: MutableLiveData<String> = MutableLiveData()
+    val loading: MutableLiveData<Boolean> = MutableLiveData()
 
-    init {
-        getFoodsAPI()
-    }
+//    init {
+//        syncData()
+//    }
 
-    fun getFoodsLocal() : LiveData<List<FoodItem>> = repository.getFoodsLocal()
+    fun getFoods(): LiveData<List<FoodItem>> = repository.getFoodsLocal()
 
-    fun insert(foodItem: List<FoodItem>){
-        viewModelScope.launch {Dispatchers.IO
-            repository.insertFoods(foodItem)
+    fun storeData(isFirst: Boolean) {
+        viewModelScope.launch(Dispatchers.IO) {
+            if (isFirst) {
+                val response = repository.getFoodsAPI()
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        repository.storeLocalData(it)
+                        withContext(Dispatchers.Main) {
+                            loading.value = false
+                        }
+                    }
+                } else {
+                    withContext(Dispatchers.Main) {
+                        onError("Error : ${response.message()} ")
+                    }
+                }
+            } else {
+                withContext(Dispatchers.Main) {
+                    loading.value = false
+                }
+            }
         }
     }
 
-    private fun getFoodsAPI() {
+    fun syncData() {
         viewModelScope.launch(Dispatchers.IO) {
-            val response = repository.getFoodsAPI()
-            withContext(Dispatchers.Main) {
+            var i = 0
+            while (true) {
+                delay(5000)
+                val response = repository.getFoodsAPI()
                 if (response.isSuccessful) {
-                    foods.postValue(response.body())
-                    loading.value = false
-                } else {
-                    onError("Error : ${response.message()} ")
+                    response.body()?.let {
+                        repository.storeLocalData(it)
+                    }
                 }
             }
         }

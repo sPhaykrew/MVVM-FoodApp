@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.homework.food.R
 import com.homework.food.databinding.FragmentMainBinding
 import com.homework.food.ui.adapter.RecyclerViewAdapterFood
 import com.homework.food.ui.main.viewmodel.FoodViewModel
@@ -39,14 +38,14 @@ class MainFragment : Fragment() {
     }
 
     private fun observeData(){
-        foodViewModel.foods.observe(viewLifecycleOwner, Observer {
+        foodViewModel.getFoods().observe(viewLifecycleOwner, Observer {
             recyclerViewAdapterFood.setItem(it)
             fragmentMainBinding.recyclerview.adapter = recyclerViewAdapterFood
             recyclerViewAdapterFood.notifyDataSetChanged()
         })
 
         foodViewModel.errorMessage.observe(viewLifecycleOwner, Observer {
-            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
         })
 
         foodViewModel.loading.observe(viewLifecycleOwner, Observer {

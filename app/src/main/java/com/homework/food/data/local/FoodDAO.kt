@@ -13,4 +13,7 @@ interface FoodDAO {
 
     @Insert
     suspend fun insert(foodItem: List<FoodItem>)
+
+    @Query("DELETE FROM food_table")
+    suspend fun deleteAll()
 }
