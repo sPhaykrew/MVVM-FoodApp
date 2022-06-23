@@ -13,9 +13,9 @@ class FoodViewModel(private val repository: Repository) : ViewModel() {
     val errorMessage: MutableLiveData<String> = MutableLiveData()
     val loading: MutableLiveData<Boolean> = MutableLiveData()
 
-//    init {
-//        syncData()
-//    }
+    init {
+        syncData()
+    }
 
     fun getFoods(): LiveData<List<FoodItem>> = repository.getFoodsLocal()
 
@@ -43,7 +43,19 @@ class FoodViewModel(private val repository: Repository) : ViewModel() {
         }
     }
 
-    fun syncData() {
+    fun setFavorite(id : String){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.setFavorite(id)
+        }
+    }
+
+    fun unsetFavorite(id : String){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.unsetFavorite(id)
+        }
+    }
+
+    private fun syncData() {
         viewModelScope.launch(Dispatchers.IO) {
             var i = 0
             while (true) {
@@ -51,7 +63,7 @@ class FoodViewModel(private val repository: Repository) : ViewModel() {
                 val response = repository.getFoodsAPI()
                 if (response.isSuccessful) {
                     response.body()?.let {
-                        repository.storeLocalData(it)
+                        repository.updateData(it)
                     }
                 }
             }

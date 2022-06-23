@@ -20,5 +20,6 @@ data class FoodItem(
     @ColumnInfo val name: String,
     @ColumnInfo val proteins: String,
     @ColumnInfo val thumb: String,
-    @ColumnInfo val time: String
+    @ColumnInfo val time: String,
+    @ColumnInfo val favorite: Boolean
 ) : Parcelable

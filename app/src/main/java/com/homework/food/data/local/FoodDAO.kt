@@ -16,4 +16,13 @@ interface FoodDAO {
 
     @Query("DELETE FROM food_table")
     suspend fun deleteAll()
+
+    @Query("UPDATE food_table SET favorite = :isFavorite WHERE id = :id")
+    suspend fun setFavorite(id : String , isFavorite : Boolean = true)
+
+    @Query("UPDATE food_table SET favorite = :isFavorite WHERE id = :id")
+    suspend fun unsetFavorite(id : String , isFavorite : Boolean = false)
+
+    @Query("UPDATE food_table SET favorite = :item WHERE id = :item")
+    suspend fun updateData(item : List<FoodItem>)
 }

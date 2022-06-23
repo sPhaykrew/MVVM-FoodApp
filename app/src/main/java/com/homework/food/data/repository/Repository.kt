@@ -18,6 +18,13 @@ class Repository(private val foodApi : FoodApi , private val foodDAO: FoodDAO) {
         foodDAO.insert(foodItem)
     }
 
+    suspend fun setFavorite(id : String) = foodDAO.setFavorite(id)
+
+    suspend fun unsetFavorite(id : String) = foodDAO.unsetFavorite(id)
+
+    suspend fun updateData(foods : List<FoodItem>) = foodDAO.updateData(foods)
+
     fun getFoodsLocal() = foodDAO.getAll()
+
 
 }

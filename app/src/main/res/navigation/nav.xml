@@ -9,5 +9,23 @@
         android:id="@+id/mainFragment"
         android:name="com.homework.food.ui.main.view.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_foodDetails"
+            app:destination="@id/foodDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/foodDetails"
+        android:name="com.homework.food.ui.main.view.FoodDetails"
+        android:label="fragment_food_details"
+        tools:layout="@layout/fragment_food_details" >
+        <action
+            android:id="@+id/action_foodDetails_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="Data"
+            app:argType="com.homework.food.data.model.FoodItem" />
+    </fragment>
 </navigation>
