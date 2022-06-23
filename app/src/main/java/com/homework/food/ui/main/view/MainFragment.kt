@@ -38,7 +38,7 @@ class MainFragment : Fragment() {
     }
 
     private fun observeData(){
-        foodViewModel.getFoods().observe(viewLifecycleOwner, Observer {
+        foodViewModel.getFoods.observe(viewLifecycleOwner, Observer {
             recyclerViewAdapterFood.setItem(it)
             fragmentMainBinding.recyclerview.adapter = recyclerViewAdapterFood
             recyclerViewAdapterFood.notifyDataSetChanged()

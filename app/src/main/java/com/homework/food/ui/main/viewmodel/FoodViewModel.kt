@@ -17,7 +17,7 @@ class FoodViewModel(private val repository: Repository) : ViewModel() {
         syncData()
     }
 
-    fun getFoods(): LiveData<List<FoodItem>> = repository.getFoodsLocal()
+    val getFoods : LiveData<List<FoodItem>> = repository.getFoodsLocal()
 
     fun storeData(isFirst: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -57,15 +57,21 @@ class FoodViewModel(private val repository: Repository) : ViewModel() {
 
     private fun syncData() {
         viewModelScope.launch(Dispatchers.IO) {
-            var i = 0
             while (true) {
-                delay(5000)
+                delay(6000)
+                var list = emptyList<FoodItem>()
                 val response = repository.getFoodsAPI()
                 if (response.isSuccessful) {
                     response.body()?.let {
-                        repository.updateData(it)
+                        list = it
+                    }
+                    for(i in 0 until getFoods.value!!.size){
+                        if(getFoods.value!![i].favorite){
+                            list[i].favorite = true
+                        }
                     }
                 }
+                repository.storeLocalData(list)
             }
         }
     }
