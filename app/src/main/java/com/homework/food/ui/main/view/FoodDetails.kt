@@ -15,7 +15,7 @@ import com.homework.food.utils.loadImage
 
 class FoodDetails : Fragment() {
 
-    lateinit var fragmentFoodDetailsBinding: FragmentFoodDetailsBinding
+    private lateinit var fragmentFoodDetailsBinding: FragmentFoodDetailsBinding
     private val food by navArgs<FoodDetailsArgs>()
     private val foodViewModel: FoodViewModel by activityViewModels()
 
@@ -40,8 +40,8 @@ class FoodDetails : Fragment() {
     }
 
     private fun getFood(){
-        fragmentFoodDetailsBinding.foodImage.loadImage(food.data.thumb)
-        fragmentFoodDetailsBinding.name.text = food.data.name
+        fragmentFoodDetailsBinding.foodImage.loadImage(food.data.image)
+        fragmentFoodDetailsBinding.foodName.text = food.data.name
     }
 
 }

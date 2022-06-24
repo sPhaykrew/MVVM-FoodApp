@@ -11,15 +11,6 @@ fun ImageView.loadImage(uri: String?) {
     Glide.with(this.context)
         .setDefaultRequestOptions(options)
         .load(uri)
-        .into(this)
-}
-
-fun ImageView.loadImageResize(uri: String?) {
-    val options = RequestOptions()
-        .error(R.mipmap.ic_launcher_round)
-    Glide.with(this.context)
-        .setDefaultRequestOptions(options)
-        .load(uri)
-        .override(350,700)
+        .circleCrop()
         .into(this)
 }

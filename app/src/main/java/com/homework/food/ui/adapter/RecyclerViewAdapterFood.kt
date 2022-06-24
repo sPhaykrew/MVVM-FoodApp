@@ -23,8 +23,13 @@ class RecyclerViewAdapterFood : RecyclerView.Adapter<RecyclerViewAdapterFood.Vie
     }
 
     override fun onBindViewHolder(holder: RecyclerViewAdapterFood.ViewHolder, position: Int) {
+        var name = item[position].name
+        if(name.length > 16) { name = name.substring(0,16) + "..."}
+
+        holder.binding.foodName.text = name
+        holder.binding.calorie.text = "Cal : ${item[position].calories}"
+        holder.binding.carbos.text = "Carb : ${item[position].carbos}"
         holder.binding.image.loadImage(item[position].thumb)
-        holder.binding.name.text = item[position].name
 
         if (item[position].favorite){
             holder.binding.favorite.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
