@@ -6,12 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.homework.food.R
+import com.homework.food.data.model.FoodItem
 import com.homework.food.databinding.FragmentFoodDetailsBinding
-import com.homework.food.databinding.FragmentMainBinding
 import com.homework.food.ui.main.viewmodel.FoodViewModel
 import com.homework.food.utils.loadImage
+import com.homework.food.utils.loadImageCircle
 
 class FoodDetails : Fragment() {
 
@@ -25,32 +28,49 @@ class FoodDetails : Fragment() {
     ): View? {
         fragmentFoodDetailsBinding = FragmentFoodDetailsBinding.inflate(inflater, container, false)
 
-        getFood()
-
-        fragmentFoodDetailsBinding.favorite.setOnClickListener {
-            val isFavorite = food.data.favorite
-            if (isFavorite){
-                foodViewModel.unsetFavorite(food.data.id)
-            } else {
-                foodViewModel.setFavorite(food.data.id)
-            }
-        }
+        initToolbar()
+        initFood()
 
         return fragmentFoodDetailsBinding.root
     }
 
-    private fun getFood(){
-        fragmentFoodDetailsBinding.foodImage.loadImage(food.data.image)
-        fragmentFoodDetailsBinding.foodName.text = food.data.name
+    private fun initToolbar(){
+        fragmentFoodDetailsBinding.toolbarSub.setNavigationOnClickListener {
+            findNavController().navigate(R.id.action_foodDetails_to_mainFragment)
+        }
+    }
 
-        //cardView
-        fragmentFoodDetailsBinding.calorieValue.text = food.data.calories.split(" ")[0]
-        fragmentFoodDetailsBinding.carbosValue.text = food.data.carbos.split(" ")[0]
-        fragmentFoodDetailsBinding.difficultyValue.text = food.data.difficulty.toString()
-        fragmentFoodDetailsBinding.fatsValue.text = food.data.fats.split(" ")[0]
-        fragmentFoodDetailsBinding.proteinsValue.text = food.data.proteins.split(" ")[0]
-        fragmentFoodDetailsBinding.timeValue.text = food.data.time
+    private fun initFood(){
+        val foodID = food.data.id
+        foodViewModel.getFood(foodID).observe(viewLifecycleOwner, Observer {
+            fragmentFoodDetailsBinding.foodImage.loadImageCircle(it.image)
+            fragmentFoodDetailsBinding.foodName.text = it.name
+            fragmentFoodDetailsBinding.headline.text = it.headline
+            fragmentFoodDetailsBinding.description.text = it.description
 
+            //cardView
+            fragmentFoodDetailsBinding.calorieValue.text = it.calories.split(" ")[0]
+            fragmentFoodDetailsBinding.carbosValue.text = it.carbos.split(" ")[0]
+            fragmentFoodDetailsBinding.difficultyValue.text = it.difficulty.toString()
+            fragmentFoodDetailsBinding.fatsValue.text = it.fats.split(" ")[0]
+            fragmentFoodDetailsBinding.proteinsValue.text = it.proteins.split(" ")[0]
+            fragmentFoodDetailsBinding.timeValue.text = it.time
+
+            val isFavorite = it.favorite
+            if (isFavorite){
+                fragmentFoodDetailsBinding.favoriteImage.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
+            } else {
+                fragmentFoodDetailsBinding.favoriteImage.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24)
+            }
+
+            fragmentFoodDetailsBinding.favorite.setOnClickListener {
+                if (isFavorite){
+                    foodViewModel.unsetFavorite(foodID)
+                } else {
+                    foodViewModel.setFavorite(foodID)
+                }
+            }
+        })
     }
 
 }

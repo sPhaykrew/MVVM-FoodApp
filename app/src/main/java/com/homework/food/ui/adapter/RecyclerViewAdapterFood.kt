@@ -1,6 +1,5 @@
 package com.homework.food.ui.adapter
 
-import android.text.TextUtils.substring
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.Navigation
@@ -9,7 +8,7 @@ import com.homework.food.R
 import com.homework.food.data.model.FoodItem
 import com.homework.food.databinding.RecyclerviewFoodsBinding
 import com.homework.food.ui.main.view.MainFragmentDirections
-import com.homework.food.utils.loadImage
+import com.homework.food.utils.loadImageCircle
 
 class RecyclerViewAdapterFood : RecyclerView.Adapter<RecyclerViewAdapterFood.ViewHolder>() {
 
@@ -24,11 +23,11 @@ class RecyclerViewAdapterFood : RecyclerView.Adapter<RecyclerViewAdapterFood.Vie
     }
 
     override fun onBindViewHolder(holder: RecyclerViewAdapterFood.ViewHolder, position: Int) {
-        val name = if(item[position].name.length > 16) item[position].name.substring(0,16) + "..." else item[position].name
+        val name = if(item[position].name.length > 12) item[position].name.substring(0,12) + "..." else item[position].name
         holder.binding.foodName.text = name
         holder.binding.calorie.text = "Cal : ${item[position].calories}"
-        holder.binding.carbos.text = "Carb : ${item[position].carbos}"
-        holder.binding.image.loadImage(item[position].thumb)
+        holder.binding.difficult.text = "difficult : ${item[position].difficulty}"
+        holder.binding.image.loadImageCircle(item[position].thumb)
 
         if (item[position].favorite){
             holder.binding.favorite.setBackgroundResource(R.drawable.ic_baseline_favorite_24)

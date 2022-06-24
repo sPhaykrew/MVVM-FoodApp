@@ -7,7 +7,10 @@ import com.homework.food.data.model.FoodItem
 @Dao
 interface FoodDAO {
     @Query("SELECT * FROM food_table")
-    fun getAll(): LiveData<List<FoodItem>>
+    fun getAllFoods(): LiveData<List<FoodItem>>
+
+    @Query("SELECT * FROM food_table where id = :id")
+    fun getFood(id : String): LiveData<FoodItem>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(foodItem: List<FoodItem>)

@@ -5,12 +5,21 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.homework.food.R
 
-fun ImageView.loadImage(uri: String?) {
+fun ImageView.loadImageCircle(uri: String?) {
     val options = RequestOptions()
         .error(R.mipmap.ic_launcher_round)
     Glide.with(this.context)
         .setDefaultRequestOptions(options)
         .load(uri)
         .circleCrop()
+        .into(this)
+}
+
+fun ImageView.loadImage(uri: String?) {
+    val options = RequestOptions()
+        .error(R.mipmap.ic_launcher_round)
+    Glide.with(this.context)
+        .setDefaultRequestOptions(options)
+        .load(uri)
         .into(this)
 }

@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         val repository = Repository(RetrofitInstance.getAPI(),dao)
         val factory = FoodViewModelFactory(repository)
         foodViewModel = ViewModelProvider(this,factory)[FoodViewModel::class.java]
-        foodViewModel.syncData(Internet().isOnline(applicationContext))
+//        foodViewModel.syncData(Internet().isOnline(applicationContext))
     }
 
 }

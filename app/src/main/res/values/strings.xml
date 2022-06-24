@@ -15,4 +15,7 @@
     <string name="proteins">Proteins</string>
     <string name="time">Time</string>
     <string name="details">Details</string>
+    <string name="description">Description</string>
+    <string name="headline">Headline</string>
+    <string name="difficult">Difficult</string>
 </resources>

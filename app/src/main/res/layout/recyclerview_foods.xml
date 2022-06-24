@@ -39,17 +39,17 @@
             android:layout_marginStart="20dp"
             android:text="@string/calorie_"
             android:textSize="14dp"
-            app:layout_constraintBottom_toTopOf="@+id/carbos"
+            app:layout_constraintBottom_toTopOf="@+id/difficult"
             app:layout_constraintStart_toEndOf="@id/image"
-            app:layout_constraintTop_toBottomOf="@id/food_name" />
+            app:layout_constraintTop_toBottomOf="@id/food_name" /> difficult
 
         <TextView
-            android:id="@+id/carbos"
+            android:id="@+id/difficult"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginBottom="14dp"
-            android:text="@string/carbos_"
+            android:text="@string/difficult"
             android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/image"

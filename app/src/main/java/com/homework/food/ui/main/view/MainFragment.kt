@@ -28,8 +28,13 @@ class MainFragment : Fragment() {
 
         initRecyclerView()
         observeData()
+        sorting()
 
         return fragmentMainBinding.root
+    }
+
+    fun sorting(){
+        fragmentMainBinding.sorting.setOnClickListener {  }
     }
 
     private fun initRecyclerView() {
@@ -39,7 +44,7 @@ class MainFragment : Fragment() {
     }
 
     private fun observeData(){
-        foodViewModel.getFoods.observe(viewLifecycleOwner, Observer {
+        foodViewModel.getAllFoods.observe(viewLifecycleOwner, Observer {
             if(it.isNotEmpty()){
                 recyclerViewAdapterFood.setItem(it)
                 fragmentMainBinding.recyclerview.adapter = recyclerViewAdapterFood

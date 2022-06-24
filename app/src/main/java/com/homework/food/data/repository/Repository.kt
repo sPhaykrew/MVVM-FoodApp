@@ -14,6 +14,8 @@ class Repository(private val foodApi : FoodApi , private val foodDAO: FoodDAO) {
 
     suspend fun unsetFavorite(id : String) = foodDAO.unsetFavorite(id)
 
-    fun getFoodsLocal() = foodDAO.getAll()
+    fun getAllFoodsLocal() = foodDAO.getAllFoods()
+
+    fun getFoodLocal(id : String) = foodDAO.getFood(id)
 
 }

@@ -12,7 +12,9 @@ import kotlinx.coroutines.withContext
 class FoodViewModel(private val repository: Repository) : ViewModel() {
     val errorMessage: MutableLiveData<String> = MutableLiveData()
     val loading: MutableLiveData<Boolean> = MutableLiveData()
-    val getFoods: LiveData<List<FoodItem>> = repository.getFoodsLocal()
+    val getAllFoods: LiveData<List<FoodItem>> = repository.getAllFoodsLocal()
+
+    fun getFood(id : String) : LiveData<FoodItem> = repository.getFoodLocal(id)
 
     fun callAPI(isOnline: Boolean) {
         loading.value = true
@@ -61,8 +63,8 @@ class FoodViewModel(private val repository: Repository) : ViewModel() {
                         response.body()?.let {
                             list = it
                         }
-                        for (i in 0 until getFoods.value!!.size) {
-                            if (getFoods.value!![i].favorite) {
+                        for (i in 0 until getAllFoods.value!!.size) {
+                            if (getAllFoods.value!![i].favorite) {
                                 list[i].favorite = true
                             }
                         }
