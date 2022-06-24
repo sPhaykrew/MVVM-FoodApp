@@ -12,16 +12,12 @@ import kotlinx.coroutines.withContext
 class FoodViewModel(private val repository: Repository) : ViewModel() {
     val errorMessage: MutableLiveData<String> = MutableLiveData()
     val loading: MutableLiveData<Boolean> = MutableLiveData()
+    val getFoods: LiveData<List<FoodItem>> = repository.getFoodsLocal()
 
-    init {
-        syncData()
-    }
-
-    val getFoods : LiveData<List<FoodItem>> = repository.getFoodsLocal()
-
-    fun storeData(isFirst: Boolean) {
-        viewModelScope.launch(Dispatchers.IO) {
-            if (isFirst) {
+    fun callAPI(isOnline: Boolean) {
+        loading.value = true
+        if (isOnline) {
+            viewModelScope.launch(Dispatchers.IO) {
                 val response = repository.getFoodsAPI()
                 if (response.isSuccessful) {
                     response.body()?.let {
@@ -35,43 +31,46 @@ class FoodViewModel(private val repository: Repository) : ViewModel() {
                         onError("Error : ${response.message()} ")
                     }
                 }
-            } else {
-                withContext(Dispatchers.Main) {
-                    loading.value = false
-                }
             }
+        } else {
+            loading.value = false
+            onError("Error : No internet")
         }
     }
 
-    fun setFavorite(id : String){
+    fun setFavorite(id: String) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.setFavorite(id)
         }
     }
 
-    fun unsetFavorite(id : String){
+    fun unsetFavorite(id: String) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.unsetFavorite(id)
         }
     }
 
-    private fun syncData() {
+    fun syncData(isOnline: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
             while (true) {
-                delay(6000)
-                var list = emptyList<FoodItem>()
-                val response = repository.getFoodsAPI()
-                if (response.isSuccessful) {
-                    response.body()?.let {
-                        list = it
-                    }
-                    for(i in 0 until getFoods.value!!.size){
-                        if(getFoods.value!![i].favorite){
-                            list[i].favorite = true
+                delay(8000)
+                if (isOnline) {
+                    var list = emptyList<FoodItem>()
+                    val response = repository.getFoodsAPI()
+                    if (response.isSuccessful) {
+                        response.body()?.let {
+                            list = it
+                        }
+                        for (i in 0 until getFoods.value!!.size) {
+                            if (getFoods.value!![i].favorite) {
+                                list[i].favorite = true
+                            }
                         }
                     }
+                    repository.storeLocalData(list)
+                } else {
+                    Log.d("Error","No internet")
                 }
-                repository.storeLocalData(list)
             }
         }
     }
@@ -80,4 +79,5 @@ class FoodViewModel(private val repository: Repository) : ViewModel() {
         errorMessage.value = message
         loading.value = false
     }
+
 }

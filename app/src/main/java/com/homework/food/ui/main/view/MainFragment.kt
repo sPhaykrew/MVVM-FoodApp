@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.homework.food.databinding.FragmentMainBinding
 import com.homework.food.ui.adapter.RecyclerViewAdapterFood
 import com.homework.food.ui.main.viewmodel.FoodViewModel
+import com.homework.food.utils.Internet
 
 class MainFragment : Fragment() {
 
@@ -39,9 +40,13 @@ class MainFragment : Fragment() {
 
     private fun observeData(){
         foodViewModel.getFoods.observe(viewLifecycleOwner, Observer {
-            recyclerViewAdapterFood.setItem(it)
-            fragmentMainBinding.recyclerview.adapter = recyclerViewAdapterFood
-            recyclerViewAdapterFood.notifyDataSetChanged()
+            if(it.isNotEmpty()){
+                recyclerViewAdapterFood.setItem(it)
+                fragmentMainBinding.recyclerview.adapter = recyclerViewAdapterFood
+                recyclerViewAdapterFood.notifyDataSetChanged()
+            } else {
+                foodViewModel.callAPI(Internet().isOnline(requireContext()))
+            }
         })
 
         foodViewModel.errorMessage.observe(viewLifecycleOwner, Observer {

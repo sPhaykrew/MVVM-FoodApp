@@ -12,14 +12,13 @@ import com.homework.food.data.repository.Repository
 import com.homework.food.databinding.ActivityMainBinding
 import com.homework.food.ui.base.FoodViewModelFactory
 import com.homework.food.ui.main.viewmodel.FoodViewModel
-import com.homework.food.utils.Prefs
+import com.homework.food.utils.Internet
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mainBinding: ActivityMainBinding
     private lateinit var navController : NavController
     private lateinit var foodViewModel: FoodViewModel
-    var isFirst = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +27,6 @@ class MainActivity : AppCompatActivity() {
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController
-        initPrefs()
         initViewModel()
 
     }
@@ -38,13 +36,7 @@ class MainActivity : AppCompatActivity() {
         val repository = Repository(RetrofitInstance.getAPI(),dao)
         val factory = FoodViewModelFactory(repository)
         foodViewModel = ViewModelProvider(this,factory)[FoodViewModel::class.java]
-        foodViewModel.storeData(isFirst)
+        foodViewModel.syncData(Internet().isOnline(applicationContext))
     }
 
-    private fun initPrefs(){
-        isFirst = Prefs(applicationContext).getPrefs()
-        if (isFirst){
-            Prefs(applicationContext).savePrefs()
-        }
-    }
 }
