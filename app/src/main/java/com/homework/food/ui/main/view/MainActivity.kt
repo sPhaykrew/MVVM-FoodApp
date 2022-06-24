@@ -1,5 +1,6 @@
 package com.homework.food.ui.main.view
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
@@ -12,12 +13,14 @@ import com.homework.food.data.repository.Repository
 import com.homework.food.databinding.ActivityMainBinding
 import com.homework.food.ui.base.FoodViewModelFactory
 import com.homework.food.ui.main.viewmodel.FoodViewModel
-import com.homework.food.utils.Internet
+import android.view.MenuItem;
+import android.widget.PopupMenu;
+import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mainBinding: ActivityMainBinding
-    private lateinit var navController : NavController
+    private lateinit var navController: NavController
     private lateinit var foodViewModel: FoodViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,18 +28,19 @@ class MainActivity : AppCompatActivity() {
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mainBinding.root)
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController
         initViewModel()
 
     }
 
-    private fun initViewModel(){
+    private fun initViewModel() {
         val dao = FoodDB.getDatabase(this).FoodDAO()
-        val repository = Repository(RetrofitInstance.getAPI(),dao)
+        val repository = Repository(RetrofitInstance.getAPI(), dao)
         val factory = FoodViewModelFactory(repository)
-        foodViewModel = ViewModelProvider(this,factory)[FoodViewModel::class.java]
+        foodViewModel = ViewModelProvider(this, factory)[FoodViewModel::class.java]
 //        foodViewModel.syncData(Internet().isOnline(applicationContext))
     }
-
 }
+

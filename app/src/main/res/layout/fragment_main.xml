@@ -22,16 +22,26 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/subHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/subHeader"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/header"
-        android:textSize="34dp"
-        android:text="@string/recipes"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="40dp"
+        android:text="@string/recipes"
         android:textColor="@color/white"
-        android:layout_marginStart="10dp" />
+        android:textSize="34dp"
+        app:layout_constraintStart_toEndOf="@id/header"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/sorting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/ic_baseline_sort_24"
+        app:layout_constraintBottom_toTopOf="@id/rounded_left"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/rounded_left"
@@ -58,16 +68,16 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/sorting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_baseline_sort_24"
-        app:tint="@android:color/white" />
+    <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+    <!--        android:id="@+id/sorting"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginEnd="16dp"-->
+    <!--        android:layout_marginBottom="16dp"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:srcCompat="@drawable/ic_baseline_sort_24"-->
+    <!--        app:tint="@android:color/white" />-->
 
     <ProgressBar
         android:id="@+id/progressBar"
