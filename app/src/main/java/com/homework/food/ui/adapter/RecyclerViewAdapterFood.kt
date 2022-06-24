@@ -1,5 +1,6 @@
 package com.homework.food.ui.adapter
 
+import android.text.TextUtils.substring
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.Navigation
@@ -23,9 +24,7 @@ class RecyclerViewAdapterFood : RecyclerView.Adapter<RecyclerViewAdapterFood.Vie
     }
 
     override fun onBindViewHolder(holder: RecyclerViewAdapterFood.ViewHolder, position: Int) {
-        var name = item[position].name
-        if(name.length > 16) { name = name.substring(0,16) + "..."}
-
+        val name = if(item[position].name.length > 16) item[position].name.substring(0,16) + "..." else item[position].name
         holder.binding.foodName.text = name
         holder.binding.calorie.text = "Cal : ${item[position].calories}"
         holder.binding.carbos.text = "Carb : ${item[position].carbos}"

@@ -42,6 +42,15 @@ class FoodDetails : Fragment() {
     private fun getFood(){
         fragmentFoodDetailsBinding.foodImage.loadImage(food.data.image)
         fragmentFoodDetailsBinding.foodName.text = food.data.name
+
+        //cardView
+        fragmentFoodDetailsBinding.calorieValue.text = food.data.calories.split(" ")[0]
+        fragmentFoodDetailsBinding.carbosValue.text = food.data.carbos.split(" ")[0]
+        fragmentFoodDetailsBinding.difficultyValue.text = food.data.difficulty.toString()
+        fragmentFoodDetailsBinding.fatsValue.text = food.data.fats.split(" ")[0]
+        fragmentFoodDetailsBinding.proteinsValue.text = food.data.proteins.split(" ")[0]
+        fragmentFoodDetailsBinding.timeValue.text = food.data.time
+
     }
 
 }

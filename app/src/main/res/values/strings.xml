@@ -2,10 +2,17 @@
     <string name="app_name">Food</string>
     <string name="food_name">Food_name</string>
     <string name="food">Food</string>
-    <string name="healthy">Healthy</string>
-    <string name="calorie">Cal</string>
-    <string name="carbos">Carb</string>
+    <string name="recipes">Recipes</string>
+    <string name="calorie_">Cal</string>
+    <string name="calorie">Calorie</string>
+    <string name="kcal">kcal</string>
+    <string name="value">Value</string>
+    <string name="carbos_">Carb</string>
+    <string name="carbos">Carbos</string>
+    <string name="g">g</string>
+    <string name="difficulty">Difficulty</string>
+    <string name="fats">Fats</string>
+    <string name="proteins">Proteins</string>
+    <string name="time">Time</string>
     <string name="details">Details</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

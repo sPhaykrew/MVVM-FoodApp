@@ -59,9 +59,10 @@
 
     <TextView
         android:id="@+id/headline"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginTop="10dp"
         android:text="with Sweet Potato Wedges and Minted Snap Peas"
         android:textSize="14dp"
@@ -69,6 +70,7 @@
         app:layout_constraintTop_toBottomOf="@id/food_name" />
 
     <HorizontalScrollView
+        android:id="@+id/details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
@@ -98,11 +100,10 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/calorie_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:text="calorie"
+                        android:text="@string/calorie"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -111,7 +112,7 @@
                         android:id="@+id/calorie_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="516"
+                        android:text="@string/value"
                         android:textSize="16dp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -120,11 +121,10 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/calorie_unit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
-                        android:text="kcal"
+                        android:text="@string/kcal"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
@@ -134,7 +134,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/test1"
+                android:id="@+id/carbos"
                 android:layout_width="120dp"
                 android:layout_height="140dp"
                 android:layout_marginStart="5dp"
@@ -152,15 +152,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:text="calorie"
+                        android:text="@string/carbos"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
+                        android:id="@+id/carbos_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="516"
+                        android:text="@string/value"
                         android:textSize="16dp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -172,7 +173,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
-                        android:text="kcal"
+                        android:text="@string/g"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
@@ -182,14 +183,14 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/test2"
+                android:id="@+id/difficulty"
                 android:layout_width="120dp"
                 android:layout_height="140dp"
                 android:layout_marginStart="5dp"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="4dp"
                 app:cardUseCompatPadding="true"
-                app:layout_constraintStart_toEndOf="@id/test1"
+                app:layout_constraintStart_toEndOf="@id/carbos"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -200,15 +201,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:text="calorie"
+                        android:text="@string/difficulty"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
+                        android:id="@+id/difficulty_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="516"
+                        android:text="@string/value"
                         android:textSize="16dp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -220,7 +222,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
-                        android:text="kcal"
+                        android:text=""
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
@@ -230,14 +232,14 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/test3"
+                android:id="@+id/fats"
                 android:layout_width="120dp"
                 android:layout_height="140dp"
                 android:layout_marginStart="5dp"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="4dp"
                 app:cardUseCompatPadding="true"
-                app:layout_constraintStart_toEndOf="@id/test2"
+                app:layout_constraintStart_toEndOf="@id/difficulty"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -248,15 +250,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:text="calorie"
+                        android:text="@string/fats"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
+                        android:id="@+id/fats_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="516"
+                        android:text="@string/value"
                         android:textSize="16dp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -268,7 +271,105 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
-                        android:text="kcal"
+                        android:text="@string/g"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/proteins"
+                android:layout_width="120dp"
+                android:layout_height="140dp"
+                android:layout_marginStart="5dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="4dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintStart_toEndOf="@id/fats"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/proteins"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/proteins_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/value"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:text="@string/g"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/time"
+                android:layout_width="120dp"
+                android:layout_height="140dp"
+                android:layout_marginStart="5dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="4dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintStart_toEndOf="@id/proteins"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/proteins"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/time_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/value"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:text=""
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
@@ -280,6 +381,18 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </HorizontalScrollView>
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:text="There’s nothing like the simple things in life - the smell of freshly cut grass, sitting outside on a nice sunny day, spending time with friends and family. Well here is a recipe that delivers simple culinary pleasures - some nice fresh fish with a crispy crust, crunchy potato wedges and some delightfully sweet sugar snap peas flavoured with cooling mint. Slip into something comfortable and relax into a delicious dinner!"
+        android:textSize="14dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/details" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/favorite"
