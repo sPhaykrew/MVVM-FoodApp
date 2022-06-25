@@ -11,13 +11,13 @@ class Prefs(context: Context) {
     private val preferences: SharedPreferences =
         context.getSharedPreferences(MY_PREFS, MODE_PRIVATE)
 
-    fun savePrefs() {
+    fun savePrefs(value : String) {
         val editor: SharedPreferences.Editor = preferences.edit()
-        editor.putBoolean(PREFS_KEY, false)
+        editor.putString(PREFS_KEY,value)
         editor.commit()
     }
 
-    fun getPrefs(): Boolean {
-        return preferences.getBoolean(PREFS_KEY, true)
+    fun getPrefs(): String {
+        return preferences.getString(PREFS_KEY,"byName")!!
     }
 }

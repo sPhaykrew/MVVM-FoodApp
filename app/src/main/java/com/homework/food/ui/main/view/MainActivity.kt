@@ -16,6 +16,10 @@ import com.homework.food.ui.main.viewmodel.FoodViewModel
 import android.view.MenuItem;
 import android.widget.PopupMenu;
 import android.widget.Toast
+import androidx.work.*
+import com.homework.food.data.manager.Worker
+import com.homework.food.utils.Internet
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,16 +35,31 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController
-        initViewModel()
 
+        initViewModel()
+//        initWork()
     }
 
     private fun initViewModel() {
         val dao = FoodDB.getDatabase(this).FoodDAO()
-        val repository = Repository(RetrofitInstance.getAPI(), dao)
+        val api = RetrofitInstance.getAPI()
+        val repository = Repository(api,dao)
         val factory = FoodViewModelFactory(repository)
         foodViewModel = ViewModelProvider(this, factory)[FoodViewModel::class.java]
 //        foodViewModel.syncData(Internet().isOnline(applicationContext))
     }
+
+    private fun initWork(){
+        val constraint = Constraints.Builder().apply {
+            setRequiredNetworkType(NetworkType.CONNECTED)
+        }.build()
+
+        val periodicRequest  = PeriodicWorkRequestBuilder<Worker>(15, TimeUnit.MINUTES)
+            .setConstraints(constraint)
+            .build()
+
+        WorkManager.getInstance(applicationContext).enqueue(periodicRequest)
+    }
+
 }
 

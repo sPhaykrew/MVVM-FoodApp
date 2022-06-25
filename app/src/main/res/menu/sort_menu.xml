@@ -8,13 +8,13 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/byDiff"
-        android:title="Sort by difficult"
+        android:id="@+id/byCal"
+        android:title="Sort by cal"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/byCal"
-        android:title="Sort by cal"
+        android:id="@+id/byDiff"
+        android:title="Sort by difficult"
         app:showAsAction="never" />
 
 </menu>

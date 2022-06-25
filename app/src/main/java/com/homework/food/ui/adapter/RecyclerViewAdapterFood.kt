@@ -16,6 +16,7 @@ class RecyclerViewAdapterFood : RecyclerView.Adapter<RecyclerViewAdapterFood.Vie
 
     fun setItem(item : List<FoodItem>){
         this.item = item
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewAdapterFood.ViewHolder {
