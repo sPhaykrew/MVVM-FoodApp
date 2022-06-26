@@ -20,6 +20,8 @@ class Repository(private val foodApi: FoodApi, private val foodDAO: FoodDAO) {
 
     fun getAllFoodsByDiff() = foodDAO.getAllFoodsByDiff()
 
+    fun getAllFoodsByFavor() = foodDAO.getAllFoodsByFavor()
+
     fun getFoodLocal(id: String) = foodDAO.getFood(id)
 
     suspend fun setFavorite(id: String) = foodDAO.setFavorite(id)

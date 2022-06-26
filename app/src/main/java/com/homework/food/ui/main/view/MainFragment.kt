@@ -62,6 +62,11 @@ class MainFragment : Fragment() {
                         foodViewModel.sortValue.postValue(sorting)
                         myPrefs.savePrefs(sorting)
                     }
+                    (R.id.byFavor) -> {
+                        val sorting = "byFavor"
+                        foodViewModel.sortValue.postValue(sorting)
+                        myPrefs.savePrefs(sorting)
+                    }
                 }
                 true
             }
@@ -102,8 +107,19 @@ class MainFragment : Fragment() {
                         }
                     })
                 }
-                else -> {
+                "byDiff" -> {
                     foodViewModel.getAllFoodsByDiff.observe(viewLifecycleOwner, Observer { item ->
+                        if (item.isNotEmpty()) {
+                            recyclerViewAdapterFood.setItem(item)
+                            recyclerViewAdapterFood.notifyDataSetChanged()
+                            fragmentMainBinding.recyclerview.adapter = recyclerViewAdapterFood
+                        } else {
+                            foodViewModel.callAPI(Internet().isOnline(requireContext()))
+                        }
+                    })
+                }
+                else -> {
+                    foodViewModel.getAllFoodsByFavor.observe(viewLifecycleOwner, Observer { item ->
                         if (item.isNotEmpty()) {
                             recyclerViewAdapterFood.setItem(item)
                             recyclerViewAdapterFood.notifyDataSetChanged()

@@ -17,4 +17,9 @@
         android:title="Sort by difficult"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/byFavor"
+        android:title="Sort by favorite"
+        app:showAsAction="never" />
+
 </menu>

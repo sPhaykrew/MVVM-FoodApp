@@ -15,6 +15,7 @@ class FoodViewModel(private val repository: Repository) : ViewModel() {
     val getAllFoodsByName: LiveData<List<FoodItem>> = repository.getAllFoodsByName()
     val getAllFoodsByCal: LiveData<List<FoodItem>> = repository.getAllFoodsByCal()
     val getAllFoodsByDiff: LiveData<List<FoodItem>> = repository.getAllFoodsByDiff()
+    val getAllFoodsByFavor: LiveData<List<FoodItem>> = repository.getAllFoodsByFavor()
     var sortValue: MutableLiveData<String> = MutableLiveData()
 
 

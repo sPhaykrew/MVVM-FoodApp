@@ -16,6 +16,9 @@ interface FoodDAO {
     @Query("SELECT * FROM food_table ORDER BY difficulty ASC")
     fun getAllFoodsByDiff(): LiveData<List<FoodItem>>
 
+    @Query("SELECT * FROM food_table ORDER BY favorite DESC")
+    fun getAllFoodsByFavor(): LiveData<List<FoodItem>>
+
     @Query("SELECT * FROM food_table where id = :id")
     fun getFood(id : String): LiveData<FoodItem>
 
