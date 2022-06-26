@@ -20,7 +20,7 @@ Show list of food recipes and details
 - ViewModel store and manage UI-related data in a lifecycle conscious way
 - Room for save data from api 
 - Work manager for sync data in background
-- Navigation for navigation between activity and fragment
+- Navigation component for navigation between activity and fragment
 - View Binding for generates a binding class for each XML layout file
 - Coroutines for asynchronous 
 - Retrofit2 a type-safe HTTP client
