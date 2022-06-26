@@ -47,43 +47,29 @@ class MainActivity : AppCompatActivity() {
     private fun initViewModel() {
         val dao = FoodDB.getDatabase(this).FoodDAO()
         val api = RetrofitInstance.getAPI()
-        val repository = Repository(api,dao)
+        val repository = Repository(api, dao)
         val factory = FoodViewModelFactory(repository)
         foodViewModel = ViewModelProvider(this, factory)[FoodViewModel::class.java]
 //        foodViewModel.syncData(Internet().isOnline(applicationContext))
     }
 
-    private fun initWork(){
+    private fun initWork() {
+        var i = 1
         val constraint = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.CONNECTED)
             .build()
 
-        val periodicRequest  = PeriodicWorkRequestBuilder<Worker>(15, TimeUnit.MINUTES)
-            .setConstraints(constraint)
-            .build()
-
-//        val periodicRequest  = OneTimeWorkRequestBuilder<Worker>().setInitialDelay(2, TimeUnit.MINUTES)
+//        val periodicRequest  = PeriodicWorkRequestBuilder<Worker>(15, TimeUnit.MINUTES)
 //            .setConstraints(constraint)
+////            .setInitialDelay(15,TimeUnit.MINUTES)
 //            .build()
 
-//        WorkManager.getInstance(applicationContext).enqueue(periodicRequest)
+        val periodicRequest =
+            OneTimeWorkRequestBuilder<Worker>().setInitialDelay(1, TimeUnit.MINUTES)
+                .setConstraints(constraint)
+                .build()
 
-        WorkManager.getInstance(applicationContext).enqueueUniquePeriodicWork("Test",
-            ExistingPeriodicWorkPolicy.KEEP,periodicRequest)
-
-//        WorkManager.getInstance(applicationContext).getWorkInfoByIdLiveData(periodicRequest.id)
-//            .observe(this, Observer { info: WorkInfo ->
-//                if (info.state == WorkInfo.State.SUCCEEDED) {
-//                    WorkManager.getInstance(applicationContext).enqueue(periodicRequest)
-//                }
-//            })
-
-//        WorkManager.getInstance(applicationContext).getWorkInfoByIdLiveData(periodicRequest.id)
-//            .observe(this, Observer { info: WorkInfo ->
-//                if (info.state == WorkInfo.State.SUCCEEDED) {
-//                    Log.i("vvvvvvvvvvvvvvvv","vvvvvvvvvvvvvv")
-//                }
-//            })
+        WorkManager.getInstance(applicationContext).enqueue(periodicRequest)
     }
 
 }

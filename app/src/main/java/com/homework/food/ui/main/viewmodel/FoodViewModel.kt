@@ -42,7 +42,7 @@ class FoodViewModel(private val repository: Repository) : ViewModel() {
 
     fun setFavorite(id: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.delete(getAllFoodsByName.value!![getAllFoodsByName.value!!.size - 1])
+//            repository.delete(getAllFoodsByName.value!![getAllFoodsByName.value!!.size - 1])
             repository.setFavorite(id)
         }
     }
@@ -57,31 +57,6 @@ class FoodViewModel(private val repository: Repository) : ViewModel() {
     private fun onError(message: String) {
         errorMessage.value = message
         loading.value = false
-    }
-
-    fun syncData(isOnline: Boolean) {
-        viewModelScope.launch(Dispatchers.IO) {
-            while (true) {
-                delay(8000)
-                if (isOnline) {
-                    var list = emptyList<FoodItem>()
-                    val response = repository.getFoodsAPI()
-                    if (response.isSuccessful) {
-                        response.body()?.let {
-                            list = it
-                        }
-                        for (i in 0 until getAllFoodsByName.value!!.size) {
-                            if (getAllFoodsByName.value!![i].favorite) {
-                                list[i].favorite = true
-                            }
-                        }
-                    }
-                    repository.storeLocalData_(list)
-                } else {
-                    Log.d("Error", "No internet")
-                }
-            }
-        }
     }
 
 }

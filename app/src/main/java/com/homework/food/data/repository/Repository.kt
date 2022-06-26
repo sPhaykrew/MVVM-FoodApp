@@ -39,30 +39,26 @@ class Repository(private val foodApi: FoodApi, private val foodDAO: FoodDAO) {
         }
     }
 
-    suspend fun syncData(){
+    suspend fun syncData() {
         withContext(Dispatchers.IO) {
-//            val foodsLocal : LiveData<List<FoodItem>>? = foodDAO.getAllFoodsByName()
-//            var foodsAPI = emptyList<FoodItem>()
-//            if (foodsLocal != null) {
-//                    val response = foodApi.getFoods()
-//                    if (response.isSuccessful){
-//                        response.body()?.let {
-//                            foodsAPI = it
-//                            Log.d("aaaaaaaaa",foodsAPI.size.toString())
-//                        }
-//                    }
-//                    for (i in 0 until foodsLocal.value!!.size) {
-//                        if (foodsLocal.value!![i].favorite) {
-//                            foodsAPI[i].favorite = true
-//                        }
-//                    }
-//            }
-//
-//            foodDAO.insert(foodsAPI)
-            Log.d("aaaaaaaaa","ssssssssssssssss")
+            val foodsLocal = foodDAO.getAllFoods()
+            var foodsAPI = emptyList<FoodItem>()
+            if (foodsLocal.isNotEmpty()) {
+                val response = foodApi.getFoods()
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        foodsAPI = it
+                    }
+                }
+
+                for (i in foodsLocal.indices) {
+                    if (foodsLocal[i].favorite && foodsLocal[i].name == foodsAPI[i].name) {
+                        foodsAPI[i].favorite = true
+                    }
+                }
+                foodDAO.insert(foodsAPI)
+            }
         }
     }
-
-    suspend fun storeLocalData_(foodItem: List<FoodItem>) = foodDAO.insert(foodItem)
 
 }

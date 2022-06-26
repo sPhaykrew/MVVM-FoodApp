@@ -31,4 +31,7 @@ interface FoodDAO {
     @Delete
     suspend fun delete(foodItem: FoodItem)
 
+    @Query("SELECT * FROM food_table")
+    suspend fun getAllFoods(): List<FoodItem>
+
 }
