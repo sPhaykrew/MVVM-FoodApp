@@ -6,7 +6,7 @@ Show list of food recipes and details
 - Show details food recipes
 - Can be save food recipes as favorite
 - Can be sort food recipes and save sort setting
-- Save data to local db
+- Save data from api to local db
 - Sync data from api to local db every 15 min (in work manager has a minimum interval of 15 minutes)
 
 # Screenshots
