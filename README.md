@@ -27,5 +27,5 @@ Show list of food recipes and details
 - Gilde for load image url to imageview
 
 # ***
-Can't use in kotlin version 1.7.0 some issue in coroutines. Please use a version lower than 1.7.0
+Can't use kotlin version 1.7.0 some issue in coroutines. Please use a version lower than 1.7.0
 
