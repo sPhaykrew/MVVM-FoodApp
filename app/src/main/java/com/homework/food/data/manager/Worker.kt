@@ -14,15 +14,15 @@ class Worker(context: Context, workerParams: WorkerParameters) : CoroutineWorker
 
     override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
         try {
-            val dao = FoodDB.getDatabase(applicationContext).FoodDAO()
-            val api = RetrofitInstance.getAPI()
-            val repository = Repository(api,dao)
-            repository.storeLocalData()
-            Log.e("AAAAAAAAAAAAA","success")
+//            val dao = FoodDB.getDatabase(applicationContext).FoodDAO()
+//            val api = RetrofitInstance.getAPI()
+//            val repository = Repository(api,dao)
+//            repository.syncData()
+            Log.e("check_worker","success")
             Result.success()
         } catch (e: Exception){
             Log.e("Error",e.message.toString())
-            Result.retry()
+            Result.failure()
         }
     }
 

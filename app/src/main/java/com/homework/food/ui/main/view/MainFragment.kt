@@ -1,6 +1,5 @@
 package com.homework.food.ui.main.view
 
-import android.app.ProgressDialog.show
 import android.os.Bundle
 import android.view.*
 import android.widget.PopupMenu

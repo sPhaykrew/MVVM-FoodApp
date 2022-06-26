@@ -1,8 +1,10 @@
 package com.homework.food.ui.main.view
 
+import android.app.Activity
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -16,6 +18,7 @@ import com.homework.food.ui.main.viewmodel.FoodViewModel
 import android.view.MenuItem;
 import android.widget.PopupMenu;
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.work.*
 import com.homework.food.data.manager.Worker
 import com.homework.food.utils.Internet
@@ -37,7 +40,8 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
 
         initViewModel()
-//        initWork()
+        initWork()
+
     }
 
     private fun initViewModel() {
@@ -50,15 +54,36 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initWork(){
-        val constraint = Constraints.Builder().apply {
-            setRequiredNetworkType(NetworkType.CONNECTED)
-        }.build()
+        val constraint = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .build()
 
         val periodicRequest  = PeriodicWorkRequestBuilder<Worker>(15, TimeUnit.MINUTES)
             .setConstraints(constraint)
             .build()
 
-        WorkManager.getInstance(applicationContext).enqueue(periodicRequest)
+//        val periodicRequest  = OneTimeWorkRequestBuilder<Worker>().setInitialDelay(2, TimeUnit.MINUTES)
+//            .setConstraints(constraint)
+//            .build()
+
+//        WorkManager.getInstance(applicationContext).enqueue(periodicRequest)
+
+        WorkManager.getInstance(applicationContext).enqueueUniquePeriodicWork("Test",
+            ExistingPeriodicWorkPolicy.KEEP,periodicRequest)
+
+//        WorkManager.getInstance(applicationContext).getWorkInfoByIdLiveData(periodicRequest.id)
+//            .observe(this, Observer { info: WorkInfo ->
+//                if (info.state == WorkInfo.State.SUCCEEDED) {
+//                    WorkManager.getInstance(applicationContext).enqueue(periodicRequest)
+//                }
+//            })
+
+//        WorkManager.getInstance(applicationContext).getWorkInfoByIdLiveData(periodicRequest.id)
+//            .observe(this, Observer { info: WorkInfo ->
+//                if (info.state == WorkInfo.State.SUCCEEDED) {
+//                    Log.i("vvvvvvvvvvvvvvvv","vvvvvvvvvvvvvv")
+//                }
+//            })
     }
 
 }
