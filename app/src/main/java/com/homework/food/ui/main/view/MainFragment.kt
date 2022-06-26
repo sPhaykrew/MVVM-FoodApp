@@ -85,8 +85,8 @@ class MainFragment : Fragment() {
 
         foodViewModel.sortValue.observe(viewLifecycleOwner,Observer{
             when(it){
-                "byName" -> {
-                    foodViewModel.getAllFoodsByName.observe(viewLifecycleOwner, Observer { item ->
+                "byFavor" -> {
+                    foodViewModel.getAllFoodsByFavor.observe(viewLifecycleOwner, Observer { item ->
                         if (item.isNotEmpty()) {
                             recyclerViewAdapterFood.setItem(item)
                             recyclerViewAdapterFood.notifyDataSetChanged()
@@ -119,7 +119,7 @@ class MainFragment : Fragment() {
                     })
                 }
                 else -> {
-                    foodViewModel.getAllFoodsByFavor.observe(viewLifecycleOwner, Observer { item ->
+                    foodViewModel.getAllFoodsByName.observe(viewLifecycleOwner, Observer { item ->
                         if (item.isNotEmpty()) {
                             recyclerViewAdapterFood.setItem(item)
                             recyclerViewAdapterFood.notifyDataSetChanged()
