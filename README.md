@@ -26,6 +26,6 @@ Show list of food recipes and details
 - Retrofit2 a type-safe HTTP client
 - Gilde for load image url to imageview
 
-# **
+# ***
 Can't use in kotlin version 1.7.0 some issue in coroutines. Please use a version lower than 1.7.0
 
