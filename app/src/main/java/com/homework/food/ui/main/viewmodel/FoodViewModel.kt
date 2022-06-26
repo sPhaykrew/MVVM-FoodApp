@@ -1,6 +1,5 @@
 package com.homework.food.ui.main.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.homework.food.data.model.FoodItem
 import com.homework.food.data.repository.Repository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class FoodViewModel(private val repository: Repository) : ViewModel() {
@@ -17,7 +15,7 @@ class FoodViewModel(private val repository: Repository) : ViewModel() {
     val getAllFoodsByName: LiveData<List<FoodItem>> = repository.getAllFoodsByName()
     val getAllFoodsByCal: LiveData<List<FoodItem>> = repository.getAllFoodsByCal()
     val getAllFoodsByDiff: LiveData<List<FoodItem>> = repository.getAllFoodsByDiff()
-    var sortValue: MutableLiveData<String> = MutableLiveData("byName")
+    var sortValue: MutableLiveData<String> = MutableLiveData()
 
 
     fun getFood(id: String): LiveData<FoodItem> = repository.getFoodLocal(id)
@@ -42,7 +40,6 @@ class FoodViewModel(private val repository: Repository) : ViewModel() {
 
     fun setFavorite(id: String) {
         viewModelScope.launch(Dispatchers.IO) {
-//            repository.delete(getAllFoodsByName.value!![getAllFoodsByName.value!!.size - 1])
             repository.setFavorite(id)
         }
     }

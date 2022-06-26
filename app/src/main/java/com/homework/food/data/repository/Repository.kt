@@ -50,10 +50,11 @@ class Repository(private val foodApi: FoodApi, private val foodDAO: FoodDAO) {
                         foodsAPI = it
                     }
                 }
-
-                for (i in foodsLocal.indices) {
-                    if (foodsLocal[i].favorite && foodsLocal[i].name == foodsAPI[i].name) {
-                        foodsAPI[i].favorite = true
+                for (i in foodsLocal.indices){
+                    for(j in foodsAPI.indices){
+                        if (foodsLocal[i].id == foodsAPI[j].id && foodsLocal[i].favorite){
+                            foodsAPI[j].favorite = true
+                        }
                     }
                 }
                 foodDAO.insert(foodsAPI)

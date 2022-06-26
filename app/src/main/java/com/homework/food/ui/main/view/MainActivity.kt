@@ -50,24 +50,17 @@ class MainActivity : AppCompatActivity() {
         val repository = Repository(api, dao)
         val factory = FoodViewModelFactory(repository)
         foodViewModel = ViewModelProvider(this, factory)[FoodViewModel::class.java]
-//        foodViewModel.syncData(Internet().isOnline(applicationContext))
     }
 
     private fun initWork() {
-        var i = 1
         val constraint = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.CONNECTED)
             .build()
 
-//        val periodicRequest  = PeriodicWorkRequestBuilder<Worker>(15, TimeUnit.MINUTES)
-//            .setConstraints(constraint)
-////            .setInitialDelay(15,TimeUnit.MINUTES)
-//            .build()
-
-        val periodicRequest =
-            OneTimeWorkRequestBuilder<Worker>().setInitialDelay(1, TimeUnit.MINUTES)
-                .setConstraints(constraint)
-                .build()
+        val periodicRequest  = PeriodicWorkRequestBuilder<Worker>(15, TimeUnit.MINUTES)
+            .setConstraints(constraint)
+            .setInitialDelay(15,TimeUnit.MINUTES)
+            .build()
 
         WorkManager.getInstance(applicationContext).enqueue(periodicRequest)
     }
