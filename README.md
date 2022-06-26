@@ -1,5 +1,5 @@
 # Food Recipes
-show list of food recipes and details
+Show list of food recipes and details
 
 # Features
 - Show list of food recipes
