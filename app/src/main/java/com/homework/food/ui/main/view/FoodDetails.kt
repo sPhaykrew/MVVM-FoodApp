@@ -10,10 +10,8 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.homework.food.R
-import com.homework.food.data.model.FoodItem
 import com.homework.food.databinding.FragmentFoodDetailsBinding
 import com.homework.food.ui.main.viewmodel.FoodViewModel
-import com.homework.food.utils.loadImage
 import com.homework.food.utils.loadImageCircle
 
 class FoodDetails : Fragment() {
